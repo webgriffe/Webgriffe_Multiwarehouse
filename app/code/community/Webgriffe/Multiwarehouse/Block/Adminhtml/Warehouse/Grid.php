@@ -38,6 +38,12 @@ class Webgriffe_Multiwarehouse_Block_Adminhtml_Warehouse_Grid
             'index'     => 'name',
         ));
 
+        // Position
+        $this->addColumn('position', array(
+            'header'    => $this->__('Position'),
+            'index'     => 'position',
+        ));
+
         // Created at
         $this->addColumn('created_at', array(
             'header'    => $this->__('Created at'),
@@ -57,4 +63,8 @@ class Webgriffe_Multiwarehouse_Block_Adminhtml_Warehouse_Grid
         return parent::_prepareColumns();
     }
 
+    public function getRowUrl($item)
+    {
+        return $this->getUrl('*/*/edit', array('id' => $item->getId()));
+    }
 }
