@@ -22,4 +22,14 @@ class Webgriffe_Multiwarehouse_Model_Warehouse extends Mage_Core_Model_Abstract
         $this->_init('wgmw/warehouse');
     }
 
+    // Implement validation logic to be called before Admin Panel save action
+    public function validate()
+    {
+        $collection = $this->getCollection()->addFieldToFilter('code', $this->getCode());
+        if ($collection->getSize() > 0) {
+            return array(Mage::helper('wgmw')->__('A Warehouse with the same Code already exists'));
+        }
+        return array();
+    }
+
 }

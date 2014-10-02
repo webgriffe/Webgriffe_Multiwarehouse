@@ -50,6 +50,76 @@ class Webgriffe_Multiwarehouse_Adminhtml_WarehouseController
         }
     }
 
+    public function deleteAction()
+    {
+        if ($this->getRequest()->getParam('id')) {
+            try {
+                $item = Mage::getModel('wgmw/warehouse');
+                $item->setId($this->getRequest()->getParam('id'))
+                    ->delete();
+
+                Mage::getSingleton('adminhtml/session')->addSuccess($this->__('Item successfully deleted'));
+                $this->_redirect('*/*/index');
+            } catch (Exception $e) {
+                Mage::getSingleton('core/session')->addError($e->getMessage());
+                $this->_redirect('*/*/index', array('id' => $this->getRequest()->getParam('id')));
+            }
+        }
+
+        $this->_redirect('*/*/index');
+    }
+
+    public function saveAction()
+    {
+        if ($this->getRequest()->getPost()) {
+            try
+            {
+                $postData = $this->getRequest()->getPost();
+
+                $item = Mage::getModel('wgmw/warehouse');
+
+                $item->setIsSaving(true) // needed to avoid getting the associated object id
+                    ->setId($this->getRequest()->getParam('id'));
+
+                foreach (array('code','name','position') as $field)
+                {
+                    $item->setData($field, $postData[$field]);
+                }
+
+                $errors = $item->validate();
+
+                if (empty($errors))
+                {
+                    $item->save();
+
+                    Mage::getSingleton('adminhtml/session')->addSuccess($this->__('Item successfully saved'));
+                    Mage::getSingleton('adminhtml/session')->setData(false);
+                    $this->_redirect('*/*/');
+                    return;
+                }
+                else
+                {
+                    foreach ($errors as $error)
+                    {
+                        // Error messages must be set in core/session
+                        Mage::getSingleton('core/session')->addError($error);
+                    }
+                    Mage::getSingleton('adminhtml/session')->setData($postData);
+                    $this->_redirect('*/*/edit', array('id' => $this->getRequest()->getParam('id')));
+                    return;
+                }
+            }
+            catch (Exception $e)
+            {
+                Mage::getSingleton('core/session')->addError($e->getMessage());
+                Mage::getSingleton('adminhtml/session')->setData($this->getRequest()->getPost());
+                $this->_redirect('*/*/edit', array('id' => $this->getRequest()->getParam('id')));
+                return;
+            }
+        }
+        $this->_redirect('*/*/');
+    }
+
     // TODO: Check ACL
     protected function _isAllowed()
     {

@@ -41,10 +41,10 @@ class Webgriffe_Multiwarehouse_Block_Adminhtml_Warehouse_Edit_Tab_Form
                 'required' => true,
             ));
 
-        if (Mage::getSingleton('adminhtml/session')->getCustomMenuData())
+        if (Mage::getSingleton('adminhtml/session')->getData())
         {
-            $form->setValues(Mage::getSingleton('adminhtml/session')->getCustomMenuData());
-            Mage::getSingleton('adminhtml/session')->setCustomMenuData(null);
+            $form->setValues(Mage::getSingleton('adminhtml/session')->getData());
+            Mage::getSingleton('adminhtml/session')->setData(null);
         }
         elseif (Mage::registry('item_data'))
         {

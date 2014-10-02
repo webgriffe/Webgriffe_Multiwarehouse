@@ -10,8 +10,6 @@ class Webgriffe_Multiwarehouse_Block_Adminhtml_Warehouse_Edit
         $this->_blockGroup = 'wgmw';
         $this->_updateButton('save', 'label', $this->__('Save'));
         $this->_updateButton('delete', 'label', $this->__('Delete'));
-        $this->removeButton('save');
-        $this->removeButton('delete');
     }
 
     public function getHeaderText()
