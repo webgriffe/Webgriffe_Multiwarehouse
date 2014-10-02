@@ -13,6 +13,11 @@
             </wgmw>
             <wgmw_resource>
                 <class>Webgriffe_Multiwarehouse_Model_Resource</class>
+                <entities>
+                    <warehouse>
+                        <table>wg_warehouse</table>
+                    </warehouse>
+                </entities>
             </wgmw_resource>
         </models>
         <blocks>
