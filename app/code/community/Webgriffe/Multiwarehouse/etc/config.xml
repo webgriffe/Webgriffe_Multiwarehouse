@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Webgriffe_Multiwarehouse>
+            <version>0.1.0</version>
+        </Webgriffe_Multiwarehouse>
+    </modules>
+    <global>
+        <models>
+            <wgmw>
+                <class>Webgriffe_Multiwarehouse_Model</class>
+                <resourceModel>wgmw_resource</resourceModel>
+            </wgmw>
+            <wgmw_resource>
+                <class>Webgriffe_Multiwarehouse_Model_Resource</class>
+            </wgmw_resource>
+        </models>
+        <blocks>
+            <wgmw>
+                <class>Webgriffe_Multiwarehouse_Block</class>
+            </wgmw>
+        </blocks>
+        <helpers>
+            <wgmw>
+                <class>Webgriffe_Multiwarehouse_Helper</class>
+            </wgmw>
+        </helpers>
+        <resources>
+            <wgmw_setup>
+                <setup>
+                    <module>Webgriffe_Multiwarehouse</module>
+                </setup>
+            </wgmw_setup>
+        </resources>
+    </global>
+</config>

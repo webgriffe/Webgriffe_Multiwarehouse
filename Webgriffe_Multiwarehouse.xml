@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Webgriffe_Multiwarehouse>
+            <active>true</active>
+            <codePool>community</codePool>
+            <depends>
+                <Mage_CatalogInventory />
+            </depends>
+        </Webgriffe_Multiwarehouse>
+    </modules>
+</config>
