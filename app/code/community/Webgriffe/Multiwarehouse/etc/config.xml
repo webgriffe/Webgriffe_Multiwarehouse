@@ -38,4 +38,15 @@
             </wgmw_setup>
         </resources>
     </global>
+    <admin>
+        <routers>
+            <wgmw>
+                <use>admin</use>
+                <args>
+                    <module>Webgriffe_Multiwarehouse</module>
+                    <frontName>wgmw</frontName>
+                </args>
+            </wgmw>
+        </routers>
+    </admin>
 </config>

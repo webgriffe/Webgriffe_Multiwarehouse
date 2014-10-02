@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<config>
+    <menu>
+        <catalog>
+            <children>
+                <wgmw_warehouses translate="title">
+                    <title>Manage Warehouses</title>
+                    <sort_order>100</sort_order>
+                    <action>wgmw/adminhtml_warehouse/index</action>
+                </wgmw_warehouses>
+            </children>
+        </catalog>
+    </menu>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <catalog>
+                        <children>
+                            <wgmw_warehouses translate="title" module="wgmw">
+                                <title>Manage Warehouses</title>
+                                <sort_order>100</sort_order>
+                            </wgmw_warehouses>
+                        </children>
+                    </catalog>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>
