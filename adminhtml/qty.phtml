@@ -3,9 +3,11 @@
 $_enabled = $this->getIsEnabled();
 ?>
 <div id="wgmulti_qty_container">
-    <input type="hidden" name="wgmulti_original_enabled" value="<?php echo $_enabled ? '1' : '0' ?>">
-    <input type="checkbox" name="wgmulti_enabled" id="wgmulti_enabled" value="1" <?php echo $_enabled ? 'checked="checked"' : '' ?>>
-    <?php echo $this->__('Use multiple quantities') ?>
+    <input type="hidden" name="wgmulti_original_use_multiple_qty" value="<?php echo $_enabled ? '1' : '0' ?>">
+
+    <input type="checkbox" name="wgmulti_use_multiple_qty" id="wgmulti_use_multiple_qty" value="1" <?php echo $_enabled ? 'checked="checked"' : '' ?>>
+    <label class="normal" for="wgmulti_use_multiple_qty"><?php echo $this->__('Use multiple quantities') ?></label>
+
     <table id = "warehouse_qty_table" style="display:none;" class="data border">
         <tr>
             <th><?php echo $this->__('Code') ?></th>
@@ -30,8 +32,8 @@ $_enabled = $this->getIsEnabled();
             document.getElementById('wgmulti_qty_container')
         );
 
-        $('wgmulti_enabled').observe('change', function() {
-            if ($F('wgmulti_enabled')) {
+        $('wgmulti_use_multiple_qty').observe('change', function() {
+            if ($F('wgmulti_use_multiple_qty')) {
                 $('warehouse_qty_table').show();
                 $('inventory_qty').disable();
             } else {
@@ -40,7 +42,7 @@ $_enabled = $this->getIsEnabled();
             }
         });
 
-        if ($F('wgmulti_enabled')) {
+        if ($F('wgmulti_use_multiple_qty')) {
             $('warehouse_qty_table').show();
             $('inventory_qty').disable();
         } else {

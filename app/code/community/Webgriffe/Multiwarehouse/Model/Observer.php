@@ -14,7 +14,7 @@ class Webgriffe_Multiwarehouse_Model_Observer
         $post = Mage::app()->getRequest()->getPost();
 
         // if multiple quantity was disabled
-        if ($post['wgmulti_original_enabled'] == 1 && $post['wgmulti_enabled'] == 0)
+        if ($post['wgmulti_original_use_multiple_qty'] == 1 && $post['wgmulti_use_multiple_qty'] == 0)
         {
             Mage::getModel('wgmulti/warehouse_product')
                 ->getCollection()
@@ -23,7 +23,7 @@ class Webgriffe_Multiwarehouse_Model_Observer
         }
 
         // if multiple quantity was enabled
-        if ($post['wgmulti_enabled'] == 1)
+        if ($post['wgmulti_use_multiple_qty'] == 1)
         {
             $totalQty = 0.0;
             foreach ($post['wgmultiqty'] as $warehouseId => $qty)
