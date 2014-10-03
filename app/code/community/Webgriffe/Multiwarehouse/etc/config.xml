@@ -49,4 +49,13 @@
             </wgmulti>
         </routers>
     </admin>
+    <adminhtml>
+        <layout>
+            <updates>
+                <wgmulti>
+                    <file>webgriffe/multiwarehouse/layout.xml</file>
+                </wgmulti>
+            </updates>
+        </layout>
+    </adminhtml>
 </config>
