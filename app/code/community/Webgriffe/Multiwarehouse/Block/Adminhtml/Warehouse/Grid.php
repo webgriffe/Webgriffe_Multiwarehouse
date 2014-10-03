@@ -14,7 +14,7 @@ class Webgriffe_Multiwarehouse_Block_Adminhtml_Warehouse_Grid
 
     protected function _prepareCollection()
     {
-        $this->setCollection(Mage::getModel('wgmw/warehouse')->getCollection());
+        $this->setCollection(Mage::getModel('wgmulti/warehouse')->getCollection());
         return parent::_prepareCollection();
     }
 

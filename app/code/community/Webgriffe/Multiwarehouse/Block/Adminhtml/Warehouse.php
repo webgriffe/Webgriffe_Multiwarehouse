@@ -5,9 +5,9 @@ class Webgriffe_Multiwarehouse_Block_Adminhtml_Warehouse
     public function __construct()
     {
         $this->_controller = 'adminhtml_warehouse';
-        $this->_blockGroup = 'wgmw';
-        $this->_headerText = Mage::helper('wgmw')->__('Manage Warehouses');
-        $this->_addButtonLabel = Mage::helper('wgmw')->__('Add');
+        $this->_blockGroup = 'wgmulti';
+        $this->_headerText = $this->__('Manage Warehouses');
+        $this->_addButtonLabel = $this->__('Add');
         parent::__construct();
     }
 

@@ -10,7 +10,7 @@ class Webgriffe_Multiwarehouse_Model_Resource_Warehouse_Collection extends Mage_
 
     protected function _construct()
     {
-        $this->_init('wgmw/warehouse');
+        $this->_init('wgmulti/warehouse');
     }
 
 }

@@ -7,46 +7,46 @@
     </modules>
     <global>
         <models>
-            <wgmw>
+            <wgmulti>
                 <class>Webgriffe_Multiwarehouse_Model</class>
-                <resourceModel>wgmw_resource</resourceModel>
-            </wgmw>
-            <wgmw_resource>
+                <resourceModel>wgmulti_resource</resourceModel>
+            </wgmulti>
+            <wgmulti_resource>
                 <class>Webgriffe_Multiwarehouse_Model_Resource</class>
                 <entities>
                     <warehouse>
                         <table>wg_warehouse</table>
                     </warehouse>
                 </entities>
-            </wgmw_resource>
+            </wgmulti_resource>
         </models>
         <blocks>
-            <wgmw>
+            <wgmulti>
                 <class>Webgriffe_Multiwarehouse_Block</class>
-            </wgmw>
+            </wgmulti>
         </blocks>
         <helpers>
-            <wgmw>
+            <wgmulti>
                 <class>Webgriffe_Multiwarehouse_Helper</class>
-            </wgmw>
+            </wgmulti>
         </helpers>
         <resources>
-            <wgmw_setup>
+            <wgmulti_setup>
                 <setup>
                     <module>Webgriffe_Multiwarehouse</module>
                 </setup>
-            </wgmw_setup>
+            </wgmulti_setup>
         </resources>
     </global>
     <admin>
         <routers>
-            <wgmw>
+            <wgmulti>
                 <use>admin</use>
                 <args>
                     <module>Webgriffe_Multiwarehouse</module>
-                    <frontName>wgmw</frontName>
+                    <frontName>wgmulti</frontName>
                 </args>
-            </wgmw>
+            </wgmulti>
         </routers>
     </admin>
 </config>

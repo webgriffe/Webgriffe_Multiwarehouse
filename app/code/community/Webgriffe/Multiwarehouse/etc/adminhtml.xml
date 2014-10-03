@@ -3,11 +3,11 @@
     <menu>
         <catalog>
             <children>
-                <wgmw_warehouses translate="title">
+                <wgwgmulti_warehouses translate="title">
                     <title>Manage Warehouses</title>
                     <sort_order>100</sort_order>
-                    <action>wgmw/adminhtml_warehouse/index</action>
-                </wgmw_warehouses>
+                    <action>wgmulti/adminhtml_warehouse/index</action>
+                </wgwgmulti_warehouses>
             </children>
         </catalog>
     </menu>
@@ -17,10 +17,10 @@
                 <children>
                     <catalog>
                         <children>
-                            <wgmw_warehouses translate="title" module="wgmw">
+                            <wgmulti_warehouses translate="title" module="wgmulti">
                                 <title>Manage Warehouses</title>
                                 <sort_order>100</sort_order>
-                            </wgmw_warehouses>
+                            </wgmulti_warehouses>
                         </children>
                     </catalog>
                 </children>

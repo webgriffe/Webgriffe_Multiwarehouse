@@ -9,7 +9,7 @@ class Webgriffe_Multiwarehouse_Block_Adminhtml_Warehouse_Edit_Tab_Form
         $form = new Varien_Data_Form();
         $this->setForm($form);
 
-        $fieldsetBasic = $form->addFieldset('wgmw_form_general', array('legend' => $this->__('General')));
+        $fieldsetBasic = $form->addFieldset('wgmulti_form_general', array('legend' => $this->__('General')));
 
         if ($id)
         {
@@ -41,26 +41,14 @@ class Webgriffe_Multiwarehouse_Block_Adminhtml_Warehouse_Edit_Tab_Form
                 'required' => true,
             ));
 
-        if (Mage::getSingleton('adminhtml/session')->getData())
+        if (Mage::getSingleton('adminhtml/session')->getWarehouseData())
         {
-            $form->setValues(Mage::getSingleton('adminhtml/session')->getData());
-            Mage::getSingleton('adminhtml/session')->setData(null);
+            $form->setValues(Mage::getSingleton('adminhtml/session')->getWarehouseData());
+            Mage::getSingleton('adminhtml/session')->setWarehouseData(null);
         }
         elseif (Mage::registry('item_data'))
         {
             $form->setValues(Mage::registry('item_data')->getData());
-        }
-
-        if ($id)
-        {
-            //edit
-        }
-        else
-        {
-            //add
-            $data = array();
-            $data['position'] = 1;
-            $form->setValues($data);
         }
 
         return parent::_prepareForm();

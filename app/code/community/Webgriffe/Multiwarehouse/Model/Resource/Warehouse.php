@@ -10,7 +10,7 @@ class Webgriffe_Multiwarehouse_Model_Resource_Warehouse extends Mage_Core_Model_
 
     protected function _construct()
     {
-        $this->_init('wgmw/warehouse', 'id');
+        $this->_init('wgmulti/warehouse', 'id');
     }
 
 }

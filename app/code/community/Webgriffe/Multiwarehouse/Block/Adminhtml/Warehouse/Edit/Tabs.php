@@ -16,7 +16,7 @@ class Webgriffe_Multiwarehouse_Block_Adminhtml_Warehouse_Edit_Tabs
         $this->addTab('form_section', array(
                 'label' => $this->__('Warehouse'),
                 'title' => $this->__('Warehouse'),
-                'content' => $this->getLayout()->createBlock('wgmw/adminhtml_warehouse_edit_tab_form')->toHtml(),
+                'content' => $this->getLayout()->createBlock('wgmulti/adminhtml_warehouse_edit_tab_form')->toHtml(),
             ));
 
         return parent::_beforeToHtml();

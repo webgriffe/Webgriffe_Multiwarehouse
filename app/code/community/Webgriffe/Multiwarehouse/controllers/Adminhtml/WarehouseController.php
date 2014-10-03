@@ -2,13 +2,21 @@
 class Webgriffe_Multiwarehouse_Adminhtml_WarehouseController
     extends Mage_Adminhtml_Controller_Action
 {
+    /**
+     * @return Mage_Adminhtml_Model_Session
+     */
+    protected function _getSession()
+    {
+        return Mage::getSingleton('adminhtml/session');
+    }
+
     protected function _initAction()
     {
         $this->_title($this->__('Catalog'))
             ->_title($this->__('Manage Warehouses'));
 
         $this->loadLayout()
-            ->_setActiveMenu('catalog/wgmw_warehouses')
+            ->_setActiveMenu('catalog/wgmulti_warehouses')
             ->_addBreadcrumb($this->__('Items Manager'), $this->__('Item Manager'));
 
         return $this;
@@ -17,7 +25,7 @@ class Webgriffe_Multiwarehouse_Adminhtml_WarehouseController
     public function indexAction()
     {
         $this->_initAction();
-        $grid = $this->getLayout()->createBlock('wgmw/adminhtml_warehouse', 'wgmwwarehouse');
+        $grid = $this->getLayout()->createBlock('wgmulti/adminhtml_warehouse', 'wgmultiwarehouse');
         $this->_addContent($grid);
         $this->renderLayout();
     }
@@ -30,7 +38,7 @@ class Webgriffe_Multiwarehouse_Adminhtml_WarehouseController
     public function editAction()
     {
         $itemId = $this->getRequest()->getParam('id');
-        $item = Mage::getModel('wgmw/warehouse')->load($itemId);
+        $item = Mage::getModel('wgmulti/warehouse')->load($itemId);
         if ($item->getId() || $itemId == 0) {
             Mage::register('item_data', $item);
             $this->_initAction();
@@ -38,8 +46,8 @@ class Webgriffe_Multiwarehouse_Adminhtml_WarehouseController
             $this->_addBreadcrumb($this->__('New Item'), $this->__('New Item'));
             $this->getLayout()->getBlock('head')->setCanLoadExtJs(true);
 
-            $this->_addContent($this->getLayout()->createBlock('wgmw/adminhtml_warehouse_edit'))
-                ->_addLeft($this->getLayout()->createBlock('wgmw/adminhtml_warehouse_edit_tabs'));
+            $this->_addContent($this->getLayout()->createBlock('wgmulti/adminhtml_warehouse_edit'))
+                ->_addLeft($this->getLayout()->createBlock('wgmulti/adminhtml_warehouse_edit_tabs'));
 
             $this->renderLayout();
         }
@@ -54,11 +62,11 @@ class Webgriffe_Multiwarehouse_Adminhtml_WarehouseController
     {
         if ($this->getRequest()->getParam('id')) {
             try {
-                $item = Mage::getModel('wgmw/warehouse');
+                $item = Mage::getModel('wgmulti/warehouse');
                 $item->setId($this->getRequest()->getParam('id'))
                     ->delete();
 
-                Mage::getSingleton('adminhtml/session')->addSuccess($this->__('Item successfully deleted'));
+                $this->_getSession()->addSuccess($this->__('Item successfully deleted'));
                 $this->_redirect('*/*/index');
             } catch (Exception $e) {
                 Mage::getSingleton('core/session')->addError($e->getMessage());
@@ -71,19 +79,18 @@ class Webgriffe_Multiwarehouse_Adminhtml_WarehouseController
 
     public function saveAction()
     {
-        if ($this->getRequest()->getPost()) {
+        $data = $this->getRequest()->getPost();
+        if ($data) {
             try
             {
-                $postData = $this->getRequest()->getPost();
-
-                $item = Mage::getModel('wgmw/warehouse');
+                $item = Mage::getModel('wgmulti/warehouse');
 
                 $item->setIsSaving(true) // needed to avoid getting the associated object id
                     ->setId($this->getRequest()->getParam('id'));
 
                 foreach (array('code','name','position') as $field)
                 {
-                    $item->setData($field, $postData[$field]);
+                    $item->setData($field, $data[$field]);
                 }
 
                 $errors = $item->validate();
@@ -92,8 +99,8 @@ class Webgriffe_Multiwarehouse_Adminhtml_WarehouseController
                 {
                     $item->save();
 
-                    Mage::getSingleton('adminhtml/session')->addSuccess($this->__('Item successfully saved'));
-                    Mage::getSingleton('adminhtml/session')->setData(false);
+                    $this->_getSession()->addSuccess($this->__('Item successfully saved'));
+                    $this->_getSession()->setWarehouseData(false);
                     $this->_redirect('*/*/');
                     return;
                 }
@@ -104,7 +111,7 @@ class Webgriffe_Multiwarehouse_Adminhtml_WarehouseController
                         // Error messages must be set in core/session
                         Mage::getSingleton('core/session')->addError($error);
                     }
-                    Mage::getSingleton('adminhtml/session')->setData($postData);
+                    $this->_getSession()->setWarehouseData($data);
                     $this->_redirect('*/*/edit', array('id' => $this->getRequest()->getParam('id')));
                     return;
                 }
@@ -112,7 +119,7 @@ class Webgriffe_Multiwarehouse_Adminhtml_WarehouseController
             catch (Exception $e)
             {
                 Mage::getSingleton('core/session')->addError($e->getMessage());
-                Mage::getSingleton('adminhtml/session')->setData($this->getRequest()->getPost());
+                $this->_getSession()->setWarehouseData($data);
                 $this->_redirect('*/*/edit', array('id' => $this->getRequest()->getParam('id')));
                 return;
             }
@@ -123,7 +130,7 @@ class Webgriffe_Multiwarehouse_Adminhtml_WarehouseController
     // TODO: Check ACL
     protected function _isAllowed()
     {
-        return parent::_isAllowed();
+        return Mage::getSingleton('admin/session')->isAllowed('catalog/wgmulti_warehouses');
     }
 
 }

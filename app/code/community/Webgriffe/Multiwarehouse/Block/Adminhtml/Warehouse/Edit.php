@@ -7,7 +7,7 @@ class Webgriffe_Multiwarehouse_Block_Adminhtml_Warehouse_Edit
         parent::__construct();
         $this->_objectId = 'id';
         $this->_controller = 'adminhtml_warehouse';
-        $this->_blockGroup = 'wgmw';
+        $this->_blockGroup = 'wgmulti';
         $this->_updateButton('save', 'label', $this->__('Save'));
         $this->_updateButton('delete', 'label', $this->__('Delete'));
     }
