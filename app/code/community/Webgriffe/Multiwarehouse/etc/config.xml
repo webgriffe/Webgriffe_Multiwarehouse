@@ -2,7 +2,7 @@
 <config>
     <modules>
         <Webgriffe_Multiwarehouse>
-            <version>0.1.0</version>
+            <version>0.1.1</version>
         </Webgriffe_Multiwarehouse>
     </modules>
     <global>
@@ -17,6 +17,9 @@
                     <warehouse>
                         <table>wg_warehouse</table>
                     </warehouse>
+                    <warehouse_product>
+                        <table>wg_warehouse_product</table>
+                    </warehouse_product>
                 </entities>
             </wgmulti_resource>
         </models>
