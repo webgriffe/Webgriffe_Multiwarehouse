@@ -12,6 +12,8 @@ class Webgriffe_Multiwarehouse_Model_Observer
         $product = $observer->getProduct();
 
         $post = Mage::app()->getRequest()->getPost();
+
+        // if multiple quantity was disabled
         if ($post['wgmulti_original_enabled'] == 1 && $post['wgmulti_enabled'] == 0)
         {
             Mage::getModel('wgmulti/warehouse_product')
@@ -20,6 +22,7 @@ class Webgriffe_Multiwarehouse_Model_Observer
                 ->delete();
         }
 
+        // if multiple quantity was enabled
         if ($post['wgmulti_enabled'] == 1)
         {
             $totalQty = 0.0;
@@ -38,14 +41,6 @@ class Webgriffe_Multiwarehouse_Model_Observer
             }
             $product->getStockItem()->setQty($totalQty);
         }
-
-        Zend_Debug::setSapi('cli');
-
-        $debug = Zend_Debug::dump($product->debug(), 'PRODUCT', 0);
-        Mage::log($debug, null, 'wgmulti.log', true);
-
-        $debug = Zend_Debug::dump($post, 'POST', 0);
-        Mage::log($debug, null, 'wgmulti.log', true);
     }
 
 }
