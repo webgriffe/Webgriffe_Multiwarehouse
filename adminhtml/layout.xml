@@ -7,4 +7,12 @@
             </action>
         </reference>
     </default>
+
+    <adminhtml_catalog_product_simple>
+        <block type="wgmulti/adminhtml_qty"
+               name="wgmulti_adminhtml_qty"
+               template="webgriffe/multiwarehouse/qty.phtml"
+               output="toHtml">
+        </block>
+    </adminhtml_catalog_product_simple>
 </layout>

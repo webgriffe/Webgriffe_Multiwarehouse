@@ -2,4 +2,5 @@ app/code/community/Webgriffe/Multiwarehouse		app/code/community/Webgriffe/Multiw
 adminhtml/layout.xml                            app/design/adminhtml/default/default/layout/webgriffe/multiwarehouse/layout.xml
 adminhtml/warehouse_icon.png                    skin/adminhtml/default/default/images/webgriffe/multiwarehouse/warehouse_icon.png
 adminhtml/webgriffe_multiwarehouse.css          skin/adminhtml/default/default/webgriffe_multiwarehouse.css
+adminhtml/qty.phtml                             app/design/adminhtml/default/default/template/webgriffe/multiwarehouse/qty.phtml
 Webgriffe_Multiwarehouse.xml	                app/etc/modules/Webgriffe_Multiwarehouse.xml

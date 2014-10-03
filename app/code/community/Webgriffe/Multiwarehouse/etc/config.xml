@@ -53,6 +53,17 @@
         </routers>
     </admin>
     <adminhtml>
+        <events>
+            <catalog_product_save_before>
+                <observers>
+                    <webgriffe_multiwarehouse>
+                        <type>singleton</type>
+                        <class>wgmulti/observer</class>
+                        <method>handleMultipleQuantitiesPost</method>
+                    </webgriffe_multiwarehouse>
+                </observers>
+            </catalog_product_save_before>
+        </events>
         <layout>
             <updates>
                 <wgmulti>
