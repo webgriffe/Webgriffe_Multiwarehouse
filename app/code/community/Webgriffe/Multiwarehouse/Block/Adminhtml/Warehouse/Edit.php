@@ -16,7 +16,7 @@ class Webgriffe_Multiwarehouse_Block_Adminhtml_Warehouse_Edit
     {
         if (Mage::registry('item_data') && Mage::registry('item_data')->getId())
         {
-            return $this->__("Edit Item").' '.Mage::registry('item_data')->getId();
+            return $this->__(sprintf("Edit Item (%d)", Mage::registry('item_data')->getId()));
         }
         else
         {
