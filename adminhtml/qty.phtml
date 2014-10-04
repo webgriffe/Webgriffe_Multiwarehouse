@@ -2,25 +2,29 @@
 /** @var Webgriffe_Multiwarehouse_Block_Adminhtml_Qty $this */
 $_enabled = $this->getIsEnabled();
 ?>
-<div id="wgmulti_qty_container">
+<div id="wgmulti_qty_container" class="grid">
     <input type="hidden" name="wgmulti_original_use_multiple_qty" value="<?php echo $_enabled ? '1' : '0' ?>">
 
     <input type="checkbox" name="wgmulti_use_multiple_qty" id="wgmulti_use_multiple_qty" value="1" <?php echo $_enabled ? 'checked="checked"' : '' ?>>
     <label class="normal" for="wgmulti_use_multiple_qty"><?php echo $this->__('Use multiple quantities') ?></label>
 
-    <table id = "warehouse_qty_table" style="display:none;" class="data border">
-        <tr>
-            <th><?php echo $this->__('Code') ?></th>
-            <th><?php echo $this->__('Name') ?></th>
-            <th><?php echo $this->__('Qty') ?></th>
-        </tr>
+    <table id="warehouse_qty_table" style="display:none;" class="data border" cellspacing="0">
+        <thead>
+            <tr class="headings">
+                <th><?php echo $this->__('Code') ?></th>
+                <th><?php echo $this->__('Name') ?></th>
+                <th><?php echo $this->__('Qty') ?></th>
+            </tr>
+        </thead>
+        <tbody>
     <?php foreach ($this->getWarehouses() as $_id => $_data): ?>
         <tr>
             <td><?php echo $_data['code']?></td>
             <td><?php echo $_data['name']?></td>
-            <td><input type="text" value="<?php echo $_data['qty']?>" name="wgmultiqty[<?php echo $_id ?>]" style="width: 50px"/></td>
+            <td class="last"><input type="text" value="<?php echo $_data['qty']?>" name="wgmultiqty[<?php echo $_id ?>]" style="width: 50px"/></td>
         </tr>
     <?php endforeach ?>
+        </tbody>
     </table>
 </div>
 <script type="text/javascript">
