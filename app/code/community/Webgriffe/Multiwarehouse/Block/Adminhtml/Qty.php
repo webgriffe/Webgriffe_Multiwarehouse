@@ -51,6 +51,9 @@ class Webgriffe_Multiwarehouse_Block_Adminhtml_Qty
 
     public function formatDecimal($val)
     {
-        return sprintf("%.2F", $val);
+        if ($this->getProduct()->getStockItem()->getIsQtyDecimal()) {
+            return sprintf("%.2F", $val);
+        }
+        return sprintf("%d", $val);
     }
 }
