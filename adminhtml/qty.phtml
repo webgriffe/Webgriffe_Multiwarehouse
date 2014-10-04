@@ -17,18 +17,17 @@ $_enabled = $this->getIsEnabled();
             </tr>
         </thead>
         <tbody>
-    <?php foreach ($this->getWarehouses() as $_id => $_data): ?>
-        <tr>
-            <td><?php echo $_data['code']?></td>
-            <td><?php echo $_data['name']?></td>
-            <td class="last"><input type="text" value="<?php echo $_data['qty']?>" name="wgmultiqty[<?php echo $_id ?>]" style="width: 50px"/></td>
-        </tr>
-    <?php endforeach ?>
+        <?php foreach ($this->getWarehouses() as $_id => $_data): ?>
+            <tr>
+                <td><?php echo $_data['code']?></td>
+                <td><?php echo $_data['name']?></td>
+                <td class="last"><input type="text" value="<?php echo $this->formatDecimal($_data['qty'])?>" name="wgmultiqty[<?php echo $_id ?>]" style="width: 50px"/></td>
+            </tr>
+        <?php endforeach ?>
         </tbody>
     </table>
 </div>
 <script type="text/javascript">
-
     document.observe("dom:loaded", function() {
         var elem = $$('#table_cataloginventory tr')[1].select('td')[1];
 
@@ -53,8 +52,5 @@ $_enabled = $this->getIsEnabled();
             $('warehouse_qty_table').hide();
             $('inventory_qty').enable();
         }
-
     });
-
-
 </script>

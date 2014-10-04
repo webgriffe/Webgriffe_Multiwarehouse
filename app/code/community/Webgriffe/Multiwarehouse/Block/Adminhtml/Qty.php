@@ -48,4 +48,9 @@ class Webgriffe_Multiwarehouse_Block_Adminhtml_Qty
 
         return $ret;
     }
+
+    public function formatDecimal($val)
+    {
+        return sprintf("%.2F", $val);
+    }
 }
