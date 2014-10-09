@@ -1,0 +1,57 @@
+title Checkout
+
+OnepageController->+Mage_Checkout_Model_Type_Onepage:saveOrder()
+
+Mage_Checkout_Model_Type_Onepage->+Mage_Sales_Model_Service_Quote:submitAll()
+Mage_Sales_Model_Service_Quote-->Mage_Sales_Model_Service_Quote:sumbitOrder()
+
+note right of Mage_Sales_Model_Service_Quote: event: checkout_type_onepage_save_order
+
+note right of Mage_Sales_Model_Service_Quote: event: sales_model_service_quote_submit_before
+
+Mage_Sales_Model_Service_Quote->+Mage_Sales_Model_Order:save()
+
+note right of Mage_Sales_Model_Order: event: sales_order_save_before
+
+note right of Mage_Sales_Model_Order: event: sales_order_save_after
+
+Mage_Sales_Model_Order-->-Mage_Sales_Model_Service_Quote:
+
+note right of Mage_Sales_Model_Order
+  commit
+  callbacks
+end note
+
+Mage_Sales_Model_Service_Quote->+Mage_Sales_Model_Order:place()
+
+note right of Mage_Sales_Model_Order: event: sales_order_place_before
+
+note right of Mage_Sales_Model_Order: payment placement
+
+note right of Mage_Sales_Model_Order: event: sales_order_place_after
+
+Mage_Sales_Model_Order-->-Mage_Sales_Model_Service_Quote:
+
+Mage_Sales_Model_Service_Quote->+Mage_Sales_Model_Order:save()
+
+note right of Mage_Sales_Model_Order: event: sales_order_save_before
+
+note right of Mage_Sales_Model_Order: event: sales_order_save_after
+
+Mage_Sales_Model_Order-->-Mage_Sales_Model_Service_Quote:
+
+alt success
+    note right of Mage_Sales_Model_Service_Quote: event: sales_model_service_quote_submit_success
+else failure
+    note right of Mage_Sales_Model_Service_Quote: event: sales_model_service_quote_submit_failure
+end
+
+note right of Mage_Sales_Model_Service_Quote: event: sales_model_service_quote_submit_after
+
+Mage_Sales_Model_Service_Quote-->-Mage_Checkout_Model_Type_Onepage:
+
+note right of Mage_Checkout_Model_Type_Onepage: event: checkout_type_onepage_save_order_after
+
+note right of Mage_Checkout_Model_Type_Onepage: event: checkout_submit_all_after
+
+Mage_Checkout_Model_Type_Onepage-->-OnepageController:

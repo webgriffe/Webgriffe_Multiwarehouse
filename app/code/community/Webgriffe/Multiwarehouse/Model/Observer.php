@@ -2,6 +2,11 @@
 class Webgriffe_Multiwarehouse_Model_Observer
 {
 
+    /**
+     * event: catalog_product_save_before
+     *
+     * @param Varien_Event_Observer $observer
+     */
     public function handleMultipleQuantitiesPost(Varien_Event_Observer $observer)
     {
         if (!Mage::app()->getRequest()->isPost()) {
@@ -43,4 +48,44 @@ class Webgriffe_Multiwarehouse_Model_Observer
         }
     }
 
+    /**
+     * event: sales_model_service_quote_submit_success
+     */
+    public function decrementQuantities(Varien_Event_Observer $observer)
+    {
+        /** @var Mage_Sales_Model_Order $order */
+        $order = $observer->getOrder();
+
+        /** @var Mage_Sales_Model_Order_Item $item */
+        foreach ($order->getAllItems() as $item)
+        {
+            $additionalData = array();
+            $serializedAdditionalData = $item->getAdditionalData();
+            if (!empty($serializedAdditionalData)) {
+                $additionalData = unserialize($serializedAdditionalData);
+            }
+
+            $orderedQty = $item->getQtyOrdered();
+
+            $warehouseProducts = Mage::getModel('wgmulti/warehouse_product')
+                ->getCollection()
+                ->addProductIdFilter($item->getProductId());
+
+            foreach ($warehouseProducts as $warehouseProduct)
+            {
+                if ($warehouseProduct->getQty() >= $orderedQty) {
+                    $warehouseProduct->setQty($warehouseProduct->getQty()-$orderedQty);
+                    $additionalData[$warehouseProduct->getWarehouseId()] = $orderedQty;
+                    break;
+                }
+                $additionalData[$warehouseProduct->getWarehouseId()] = $warehouseProduct->getQty();
+                $orderedQty -= $warehouseProduct->getQty();
+                $warehouseProduct->setQty(0);
+            }
+
+            $item->setAdditionalData(serialize($additionalData))->save();
+
+            $warehouseProducts->save();
+        }
+    }
 }

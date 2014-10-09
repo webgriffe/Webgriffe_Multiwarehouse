@@ -72,4 +72,17 @@
             </updates>
         </layout>
     </adminhtml>
+    <frontend>
+        <events>
+            <sales_model_service_quote_submit_success>
+                <observers>
+                    <webgriffe_multiwarehouse>
+                        <type>singleton</type>
+                        <class>wgmulti/observer</class>
+                        <method>decrementQuantities</method>
+                    </webgriffe_multiwarehouse>
+                </observers>
+            </sales_model_service_quote_submit_success>
+        </events>
+    </frontend>
 </config>
