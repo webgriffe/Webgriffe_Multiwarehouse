@@ -13,4 +13,13 @@ class Webgriffe_Multiwarehouse_Model_Resource_Warehouse_Collection extends Mage_
         $this->_init('wgmulti/warehouse');
     }
 
+    public function toFlatArray()
+    {
+        $arrItems = array();
+        foreach ($this as $item) {
+            $arrItems[$item->getId()] = $item->getData();
+        }
+        return $arrItems;
+    }
+
 }

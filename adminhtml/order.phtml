@@ -1,0 +1,23 @@
+<?php
+/** @var Webgriffe_Multiwarehouse_Block_Adminhtml_Order $this */
+
+/** @var Mage_Sales_Model_Order $_order */
+$_order = $this->getOrder();
+#print_r($_order->debug());
+?>
+<table id="wgmulti_warehouse" cellspacing="0" class="data order-tables">
+    <thead>
+        <tr class="headings">
+            <th><?php echo $this->__('Warehouses') ?></th>
+        </tr>
+    </thead>
+    <?php $_items = $this->getItemsCollection() ?>
+    <?php $i=0;foreach ($_items as $_item):?>
+        <?php if ($_item->getParentItem()) continue; else $i++;?>
+        <tbody class="<?php echo $i%2?'even':'odd' ?>">
+        <tr class="border">
+            <td><?php echo $this->getItemHtml($_item) ?></td>
+        </tr>
+        </tbody>
+    <?php endforeach; ?>
+</table>
