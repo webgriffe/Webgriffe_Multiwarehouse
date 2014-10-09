@@ -23,6 +23,17 @@ class Webgriffe_Multiwarehouse_Model_Resource_Warehouse_Product_Collection exten
         return $this->addFieldToFilter('warehouse_id', $warehouseId);
     }
 
+    public function addWarehousePositionOrder($direction = 'ASC')
+    {
+        $this->join(
+            array('w' => 'wgmulti/warehouse'),
+            'w.id=main_table.warehouse_id',
+            'position'
+        )->addOrder('position', $direction);
+
+        return $this;
+    }
+
     /**
      * Delete all the entities in the collection
      */

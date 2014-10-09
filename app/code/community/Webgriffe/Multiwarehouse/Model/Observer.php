@@ -67,9 +67,11 @@ class Webgriffe_Multiwarehouse_Model_Observer
 
             $orderedQty = $item->getQtyOrdered();
 
+            /** @var Webgriffe_Multiwarehouse_Model_Resource_Warehouse_Product_Collection $warehouseProducts */
             $warehouseProducts = Mage::getModel('wgmulti/warehouse_product')
                 ->getCollection()
-                ->addProductIdFilter($item->getProductId());
+                ->addProductIdFilter($item->getProductId())
+                ->addWarehousePositionOrder();
 
             foreach ($warehouseProducts as $warehouseProduct)
             {
