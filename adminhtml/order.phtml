@@ -5,29 +5,38 @@
 $_order = $this->getOrder();
 #print_r($_order->debug());
 ?>
-<div class="entry-edit">
-    <div class="entry-edit-head">
-        <h4 class="icon-head head-products"><?php echo $this->__('Warehouse details') ?></h4>
+<div id="wgmulti_warehouse">
+    <br/>
+    <div class="entry-edit">
+        <div class="entry-edit-head">
+            <h4 class="icon-head head-products"><?php echo $this->__('Warehouse details') ?></h4>
+        </div>
+    </div>
+    <div class="grid np">
+        <div class="hor-scroll">
+            <table cellspacing="0" class="data order-tables">
+                <thead>
+                    <tr class="headings">
+                        <th><?php echo $this->__('Product SKU') ?></th>
+                        <th><?php echo $this->__('Warehouse ID') ?></th>
+                        <th class="a-center"><?php echo $this->__('Qty') ?></th>
+                    </tr>
+                </thead>
+                <?php $_items = $this->getItemsCollection() ?>
+                <?php $i=0;foreach ($_items as $_item):?>
+                    <?php if ($_item->getParentItem()) continue; else $i++;?>
+                    <tbody class="<?php echo $i%2?'even':'odd' ?>">
+                        <?php echo $this->getItemHtml($_item) ?>
+                    </tbody>
+                <?php endforeach; ?>
+            </table>
+        </div>
     </div>
 </div>
-
-<div class="grid np" id="wgmulti_warehouse">
-    <div class="hor-scroll">
-        <table cellspacing="0" class="data order-tables">
-            <thead>
-                <tr class="headings">
-                    <th><?php echo $this->__('Product SKU') ?></th>
-                    <th><?php echo $this->__('Warehouse ID') ?></th>
-                    <th class="a-center"><?php echo $this->__('Qty') ?></th>
-                </tr>
-            </thead>
-            <?php $_items = $this->getItemsCollection() ?>
-            <?php $i=0;foreach ($_items as $_item):?>
-                <?php if ($_item->getParentItem()) continue; else $i++;?>
-                <tbody class="<?php echo $i%2?'even':'odd' ?>">
-                    <?php echo $this->getItemHtml($_item) ?>
-                </tbody>
-            <?php endforeach; ?>
-        </table>
-    </div>
-</div>
+<script type="text/javascript">
+    document.observe('dom:loaded', function() {
+        var wgElementToMove = $('wgmulti_warehouse');
+        var wgSiblingElement = $$('#sales_order_view_tabs_order_info_content div div.grid.np');
+        wgSiblingElement.first().insert({after: wgElementToMove});
+    });
+</script>
