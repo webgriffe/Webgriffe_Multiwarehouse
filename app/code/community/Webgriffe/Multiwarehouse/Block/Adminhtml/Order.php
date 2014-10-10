@@ -49,8 +49,8 @@ class Webgriffe_Multiwarehouse_Block_Adminhtml_Order
 
             $additionalData = unserialize($serializedAdditionalData);
 
-            $html .= '<tr class="border"><td>'.$childItem->getSku().'</td>';
-
+            $tmpHtml = '<tr class="border"><td>'.$childItem->getSku().'</td>';
+            $tmpCount = 0;
             foreach ($warehouseData as $wid => $wdata)
             {
                 $qty = 0;
@@ -58,9 +58,13 @@ class Webgriffe_Multiwarehouse_Block_Adminhtml_Order
                 {
                     $qty = $additionalData[$wid];
                 }
+                $tmpCount += $qty;
                 $qty = $this->_formatQty($qty, $childItem->getIsQtyDecimal());
 
-                $html .= '<td>' . $qty . '</td>';
+                $tmpHtml .= '<td>' . $qty . '</td>';
+            }
+            if ($tmpCount) {
+                $html .= $tmpHtml;
             }
             $html .= '</tr>';
         }
