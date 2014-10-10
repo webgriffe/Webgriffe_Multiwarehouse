@@ -5,19 +5,29 @@
 $_order = $this->getOrder();
 #print_r($_order->debug());
 ?>
-<table id="wgmulti_warehouse" cellspacing="0" class="data order-tables">
-    <thead>
-        <tr class="headings">
-            <th><?php echo $this->__('Warehouses') ?></th>
-        </tr>
-    </thead>
-    <?php $_items = $this->getItemsCollection() ?>
-    <?php $i=0;foreach ($_items as $_item):?>
-        <?php if ($_item->getParentItem()) continue; else $i++;?>
-        <tbody class="<?php echo $i%2?'even':'odd' ?>">
-        <tr class="border">
-            <td><?php echo $this->getItemHtml($_item) ?></td>
-        </tr>
-        </tbody>
-    <?php endforeach; ?>
-</table>
+<div class="entry-edit">
+    <div class="entry-edit-head">
+        <h4 class="icon-head head-products"><?php echo $this->__('Warehouse details') ?></h4>
+    </div>
+</div>
+
+<div class="grid np">
+    <div class="hor-scroll">
+        <table id="wgmulti_warehouse" cellspacing="0" class="data order-tables">
+            <thead>
+                <tr class="headings">
+                    <th><?php echo $this->__('Product SKU') ?></th>
+                    <th><?php echo $this->__('Warehouse ID') ?></th>
+                    <th class="a-center"><?php echo $this->__('Qty') ?></th>
+                </tr>
+            </thead>
+            <?php $_items = $this->getItemsCollection() ?>
+            <?php $i=0;foreach ($_items as $_item):?>
+                <?php if ($_item->getParentItem()) continue; else $i++;?>
+                <tbody class="<?php echo $i%2?'even':'odd' ?>">
+                    <?php echo $this->getItemHtml($_item) ?>
+                </tbody>
+            <?php endforeach; ?>
+        </table>
+    </div>
+</div>

@@ -36,24 +36,41 @@ class Webgriffe_Multiwarehouse_Block_Adminhtml_Order
         foreach ($children as $childItem)
         {
             $serializedAdditionalData = $childItem->getAdditionalData();
-            if (empty($serializedAdditionalData)) {
+            if (empty($serializedAdditionalData))
+            {
                 continue;
             }
 
             $additionalData = unserialize($serializedAdditionalData);
-            if (!count($additionalData)) {
+            if (!count($additionalData))
+            {
                 continue;
             }
-            $html .= 'SKU: ' . $childItem->getSku() . '<br/>';
+
             foreach($additionalData as $id => $qty)
             {
                 if ($qty > 0)
                 {
-                    $html .= sprintf("%s: %s<br/>", $warehouseData[$id]['code'], $qty);
+                    $html .= '<tr class="border"><td>' . $childItem->getSku() . '</td>';
+                    $html .= sprintf(
+                        "<td><a href=\"%s\">%s</a></td><td class=\"a-center\">%s</td>",
+                        $this->getUrl('wgmulti/adminhtml_warehouse/edit', array('id' => $id)),
+                        $warehouseData[$id]['code'],
+                        $this->_formatQty($qty, $childItem->getIsQtyDecimal()));
+                    $html .= '</tr>';
                 }
             }
         }
         return $html;
+    }
+
+    protected function _formatQty($qty, $isDecimal)
+    {
+        if ($isDecimal) {
+            return round($qty, 2);
+        }
+
+        return intval($qty);
     }
 
 
