@@ -19,7 +19,7 @@ $_warehouses = $this->getWarehouseFlatArray();
                     <tr class="headings">
                         <th><?php echo $this->__('Product SKU') ?></th>
                         <?php foreach ($_warehouses as $_warehouse): ?>
-                            <th><?php echo $_warehouse['code'] ?></th>
+                            <th><a href="<?php echo $this->getUrl('wgmulti/adminhtml_warehouse/edit', array('id' => $_warehouse['id'])) ?>"><?php echo $_warehouse['code'] ?></a></th>
                         <?php endforeach ?>
                     </tr>
                 </thead>
