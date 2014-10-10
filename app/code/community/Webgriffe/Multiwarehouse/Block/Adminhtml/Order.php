@@ -17,11 +17,17 @@ class Webgriffe_Multiwarehouse_Block_Adminhtml_Order
         return $this->getOrder()->getItemsCollection();
     }
 
-    public function getItemHtml(Mage_Sales_Model_Order_Item $item)
+    public function getWarehouseFlatArray()
     {
         $warehouses = Mage::getModel('wgmulti/warehouse')
-            ->getCollection();
-        $warehouseData = $warehouses->toFlatArray();
+            ->getCollection()
+            ->addOrder('position', 'ASC');
+        return $warehouses->toFlatArray();
+    }
+
+    public function getItemHtml(Mage_Sales_Model_Order_Item $item)
+    {
+        $warehouseData = $this->getWarehouseFlatArray();
 
         $html = '';
 
@@ -42,24 +48,21 @@ class Webgriffe_Multiwarehouse_Block_Adminhtml_Order
             }
 
             $additionalData = unserialize($serializedAdditionalData);
-            if (!count($additionalData))
-            {
-                continue;
-            }
 
-            foreach($additionalData as $id => $qty)
+            $html .= '<tr class="border"><td>'.$childItem->getSku().'</td>';
+
+            foreach ($warehouseData as $wid => $wdata)
             {
-                if ($qty > 0)
+                $qty = 0;
+                if (array_key_exists($wid, $additionalData))
                 {
-                    $html .= '<tr class="border"><td>' . $childItem->getSku() . '</td>';
-                    $html .= sprintf(
-                        "<td><a href=\"%s\">%s</a></td><td class=\"a-center\">%s</td>",
-                        $this->getUrl('wgmulti/adminhtml_warehouse/edit', array('id' => $id)),
-                        $warehouseData[$id]['code'],
-                        $this->_formatQty($qty, $childItem->getIsQtyDecimal()));
-                    $html .= '</tr>';
+                    $qty = $additionalData[$wid];
                 }
+                $qty = $this->_formatQty($qty, $childItem->getIsQtyDecimal());
+
+                $html .= '<td>' . $qty . '</td>';
             }
+            $html .= '</tr>';
         }
         return $html;
     }

@@ -3,7 +3,7 @@
 
 /** @var Mage_Sales_Model_Order $_order */
 $_order = $this->getOrder();
-#print_r($_order->debug());
+$_warehouses = $this->getWarehouseFlatArray();
 ?>
 <div id="wgmulti_warehouse">
     <br/>
@@ -18,8 +18,9 @@ $_order = $this->getOrder();
                 <thead>
                     <tr class="headings">
                         <th><?php echo $this->__('Product SKU') ?></th>
-                        <th><?php echo $this->__('Warehouse ID') ?></th>
-                        <th class="a-center"><?php echo $this->__('Qty') ?></th>
+                        <?php foreach ($_warehouses as $_warehouse): ?>
+                            <th><?php echo $_warehouse['code'] ?></th>
+                        <?php endforeach ?>
                     </tr>
                 </thead>
                 <?php $_items = $this->getItemsCollection() ?>
