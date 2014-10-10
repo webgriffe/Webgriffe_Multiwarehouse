@@ -17,9 +17,9 @@ $_warehouses = $this->getWarehouseFlatArray();
             <table cellspacing="0" class="data order-tables">
                 <thead>
                     <tr class="headings">
-                        <th><?php echo $this->__('Product SKU') ?></th>
+                        <th><?php echo $this->__('Product') ?></th>
                         <?php foreach ($_warehouses as $_warehouse): ?>
-                            <th><a href="<?php echo $this->getUrl('wgmulti/adminhtml_warehouse/edit', array('id' => $_warehouse['id'])) ?>"><?php echo $_warehouse['code'] ?></a></th>
+                            <th class="a-center"><a href="<?php echo $this->getUrl('wgmulti/adminhtml_warehouse/edit', array('id' => $_warehouse['id'])) ?>"><?php echo $_warehouse['code'] ?></a></th>
                         <?php endforeach ?>
                     </tr>
                 </thead>

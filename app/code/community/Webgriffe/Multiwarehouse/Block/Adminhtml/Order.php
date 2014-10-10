@@ -49,7 +49,11 @@ class Webgriffe_Multiwarehouse_Block_Adminhtml_Order
 
             $additionalData = unserialize($serializedAdditionalData);
 
-            $tmpHtml = '<tr class="border"><td>'.$childItem->getSku().'</td>';
+            $tmpHtml = sprintf(
+                '<tr class="border"><td><strong>%s</strong><br/><strong>SKU:</strong> %s</td>',
+                $childItem->getName(),
+                $childItem->getSku()
+            );
             $tmpCount = 0;
             foreach ($warehouseData as $wid => $wdata)
             {
@@ -61,7 +65,7 @@ class Webgriffe_Multiwarehouse_Block_Adminhtml_Order
                 $tmpCount += $qty;
                 $qty = $this->_formatQty($qty, $childItem->getIsQtyDecimal());
 
-                $tmpHtml .= '<td>' . $qty . '</td>';
+                $tmpHtml .= '<td class="a-center" style="vertical-align:middle;">' . $qty . '</td>';
             }
             if ($tmpCount) {
                 $html .= $tmpHtml;
