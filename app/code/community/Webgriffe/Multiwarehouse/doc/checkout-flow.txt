@@ -1,3 +1,5 @@
+# Created on www.websequencediagrams.com
+
 title Checkout
 
 OnepageController->+Mage_Checkout_Model_Type_Onepage:saveOrder()
