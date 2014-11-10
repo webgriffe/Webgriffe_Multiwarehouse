@@ -127,7 +127,6 @@ class Webgriffe_Multiwarehouse_Adminhtml_WarehouseController
         $this->_redirect('*/*/');
     }
 
-    // TODO: Check ACL
     protected function _isAllowed()
     {
         return Mage::getSingleton('admin/session')->isAllowed('catalog/wgmulti_warehouses');

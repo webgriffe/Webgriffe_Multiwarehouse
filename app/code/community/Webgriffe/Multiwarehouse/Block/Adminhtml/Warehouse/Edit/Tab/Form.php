@@ -11,13 +11,14 @@ class Webgriffe_Multiwarehouse_Block_Adminhtml_Warehouse_Edit_Tab_Form
 
         $fieldsetBasic = $form->addFieldset('wgmulti_form_general', array('legend' => $this->__('General')));
 
-        if ($id)
+        /**
+         * If needed, write here any specific code before form initialization
+         */
+        if ($id) // existing item
         {
-            //edit
         }
-        else
+        else // new item
         {
-            //add
         }
 
         $fieldsetBasic->addField('code', 'text', array(
