@@ -44,7 +44,12 @@ class Webgriffe_Multiwarehouse_Model_Observer
                     ->save();
                 $totalQty += $qty;
             }
-            $product->getStockItem()->setQty($totalQty);
+            $stockItem = Mage::getModel('cataloginventory/stock_item')->loadByProduct($product);
+            if ($stockItem) {
+                $stockItem
+                    ->setQty($totalQty)
+                    ->save();
+            }
         }
     }
 

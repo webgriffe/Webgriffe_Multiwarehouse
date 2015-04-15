@@ -2,7 +2,7 @@
 <config>
     <modules>
         <Webgriffe_Multiwarehouse>
-            <version>0.1.3</version>
+            <version>0.1.4</version>
         </Webgriffe_Multiwarehouse>
     </modules>
     <global>
@@ -54,7 +54,7 @@
     </admin>
     <adminhtml>
         <events>
-            <catalog_product_save_before>
+            <catalog_product_save_after>
                 <observers>
                     <webgriffe_multiwarehouse>
                         <type>singleton</type>
@@ -62,7 +62,7 @@
                         <method>handleMultipleQuantitiesPost</method>
                     </webgriffe_multiwarehouse>
                 </observers>
-            </catalog_product_save_before>
+            </catalog_product_save_after>
         </events>
         <layout>
             <updates>
