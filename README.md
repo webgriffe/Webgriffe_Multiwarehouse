@@ -13,6 +13,7 @@ Facts
 
 Release Notes
 -------------
+- 0.1.4 - Fixes some issues
 - 0.1.1 - Proof of concept
 
 Description
